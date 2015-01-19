@@ -1,0 +1,156 @@
+timestamp: 2015-01-07T10:42:36.011651
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512)
+);
+success!
+timestamp: 2015-01-07T10:42:36.077605
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2015-01-07T10:42:36.089458
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2015-01-07T10:42:36.101977
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2015-01-07T10:42:36.115320
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2015-01-07T10:42:36.127419
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2015-01-07T10:49:25.559249
+CREATE TABLE auth_user(
+    id INT IDENTITY PRIMARY KEY,
+    first_name VARCHAR(128) NULL,
+    last_name VARCHAR(128) NULL,
+    email VARCHAR(512) NULL,
+    password VARCHAR(512) NULL,
+    registration_key VARCHAR(512) NULL,
+    reset_password_key VARCHAR(512) NULL,
+    registration_id VARCHAR(512) NULL
+);
+timestamp: 2015-01-07T10:53:45.774805
+CREATE TABLE mclient(
+    last_name VARCHAR(512) NULL,
+    first_name VARCHAR(512) NULL,
+    minst VARCHAR(512) NULL,
+    address VARCHAR(512) NULL,
+    zip VARCHAR(512) NULL,
+    member_id INT NOT NULL,
+    stat VARCHAR(512) NULL,
+    PRIMARY KEY CLUSTERED (member_id)) ;
+timestamp: 2015-01-07T11:07:27.556359
+CREATE TABLE casemasterxport(
+    id INT IDENTITY PRIMARY KEY,
+    case_number VARCHAR(512) NULL,
+    member_id INT NULL,
+    casedescription TEXT NULL,
+    dateassigned DATETIME NULL,
+    dateclosed DATETIME NULL,
+    casedisposition VARCHAR(512) NULL
+);
+timestamp: 2015-01-07T11:52:37.368566
+CREATE TABLE case_master(
+    id INT IDENTITY PRIMARY KEY,
+    case_number VARCHAR(512) NULL,
+    member_id INT, CONSTRAINT FK_case_master_member_id__constraint FOREIGN KEY (member_id) REFERENCES mclient (member_id) ON DELETE NO ACTION,
+    description TEXT NULL,
+    date_assigned DATETIME NULL,
+    date_closed DATETIME NULL,
+    dead_file_box_number VARCHAR(512) NULL,
+    case_disposition VARCHAR(512) NULL,
+    assigned_to INT NULL, CONSTRAINT case_master_assigned_to__constraint FOREIGN KEY (assigned_to) REFERENCES auth_user (id) ON DELETE NO ACTION
+);
+timestamp: 2015-01-07T11:58:55.820808
+CREATE TABLE casemasterxport(
+    case_number VARCHAR(512) NOT NULL,
+    member_id INT NULL,
+    casedescription TEXT NULL,
+    dateassigned DATETIME NULL,
+    dateclosed DATETIME NULL,
+    casedisposition VARCHAR(512) NULL,
+    PRIMARY KEY CLUSTERED (case_number)) ;
+timestamp: 2015-01-07T12:02:41.841561
+CREATE TABLE case_master(
+    id INT IDENTITY PRIMARY KEY,
+    case_number VARCHAR(512) NULL,
+    member_id INT, CONSTRAINT FK_case_master_member_id__constraint FOREIGN KEY (member_id) REFERENCES mclient (member_id) ON DELETE NO ACTION,
+    description TEXT NULL,
+    date_assigned DATETIME NULL,
+    date_closed DATETIME NULL,
+    dead_file_box_number VARCHAR(512) NULL,
+    case_disposition VARCHAR(512) NULL,
+    assigned_to INT NULL, CONSTRAINT case_master_assigned_to__constraint FOREIGN KEY (assigned_to) REFERENCES auth_user (id) ON DELETE NO ACTION
+);
+faked!
+timestamp: 2015-01-14T10:17:24.366711
+CREATE TABLE case_action_master(
+    action_name VARCHAR(512) NOT NULL,
+    action_value VARCHAR(512) NULL,
+    PRIMARY KEY CLUSTERED (action_name)) ;
+timestamp: 2015-01-14T10:17:56.014369
+CREATE TABLE case_action_master(
+    action_name VARCHAR(512) NOT NULL,
+    action_value VARCHAR(512) NULL,
+    PRIMARY KEY CLUSTERED (action_name)) ;
+timestamp: 2015-01-14T10:17:58.506834
+CREATE TABLE case_action_master(
+    action_name VARCHAR(512) NOT NULL,
+    action_value VARCHAR(512) NULL,
+    PRIMARY KEY CLUSTERED (action_name)) ;
+timestamp: 2015-01-14T10:18:15.501372
+CREATE TABLE case_action_master(
+    action_name VARCHAR(512) NOT NULL,
+    action_value VARCHAR(512) NULL,
+    PRIMARY KEY CLUSTERED (action_name)) ;
+timestamp: 2015-01-14T12:31:33.386729
+CREATE TABLE casemasterxport(
+    case_number VARCHAR(512) NOT NULL,
+    member_id INT NULL,
+    casedescription TEXT NULL,
+    dateassigned DATETIME NULL,
+    dateclosed DATETIME NULL,
+    casedisposition VARCHAR(512) NULL,
+    PRIMARY KEY CLUSTERED (case_number)) ;
+success!
+timestamp: 2015-01-14T12:49:25.948415
+ALTER TABLE casemasterxport ADD firstname VARCHAR(512) NULL;
+timestamp: 2015-01-14T12:53:23.684331
+ALTER TABLE casemasterxport ADD firstname VARCHAR(512) NULL;
+timestamp: 2015-01-14T12:56:29.297687
+ALTER TABLE casemasterxport ADD firstname VARCHAR(512) NULL;
