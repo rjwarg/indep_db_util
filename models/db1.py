@@ -23,7 +23,7 @@ db.define_table('case_action_master',
 
 
 db.define_table('case_master',
-                Field('case_number'),
+                Field('case_number', 'string'),
                 Field('member_id', 'reference mclient', ondelete='NO ACTION'),
                 Field('description','text'),
                 Field('date_assigned', 'date'),
@@ -39,12 +39,13 @@ db.define_table('case_master',
  )
 
 db.define_table('case_action',
-                Field('case_id', 'reference case_master'),
-                Field('action_id', 'reference case_action_master'),
+                Field('record_id', 'id'),
+                Field('case_id'),# 'reference case_master'),
+                Field('action_id'), #'reference case_action_master'),
                 Field('date_performed', 'date'),
                 Field('remarks', 'text'),
  #               auth.signature,
-                primarykey = ['case_id','action_id'],
+                primarykey = ['record_id'],
                 migrate = False
  )
 
@@ -63,7 +64,17 @@ dbx.define_table('casemasterxport',
                 migrate= False,
                 primarykey=['case_number']
                 )
-                
+
+db.define_table('caseactionsxport',
+                Field('recordid', 'id'),
+                Field('casenumber', 'string'),
+                Field('action'),
+                Field('actiondate', 'date'),
+                Field('remarks'),
+                migrate = False,
+                primarykey = ['recordid']
+                )
+
 db2_prod.define_table('member',
                  Field('id_no','integer'),
                  Field('name', 'string','length=21'),

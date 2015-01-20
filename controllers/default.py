@@ -21,6 +21,23 @@ def index():
     response.flash = T("Welcome to web2py!")
     return dict(message=T('Hello World'))
 
+def copy_actions():
+    actions = db(db.caseactionsxport).select()
+    error_list = []
+    for a in actions:
+        try:
+            db.case_action.insert(record_id = a.recordid,
+                                  case_id = a.casenumber,
+                                  action_id = a.action,
+                                  date_performed = a.actiondate,
+                                  remarks = a.remarks
+                                  )
+        except:
+             error_list.append({"action_in_error": a, "error_is": sys.exc_info()})
+             
+                
+    return locals()                
+
 def copy_cases():
     cases = dbx(dbx.casemasterxport).select()
     error_list = []
