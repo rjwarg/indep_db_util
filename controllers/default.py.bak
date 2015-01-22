@@ -26,26 +26,27 @@ def copy_actions():
     error_list = []
     for a in actions:
         try:
-            db.case_action.insert(record_id = a.recordid,
-                                  case_id = a.casenumber,
-                                  action_id = a.action,
+            db.case_action.insert(
+                                  case_id = db(db.case_master.case_number == a.casenumber).select().first(),
+                                  action_id = db(db.case_action_master.name == a.action).select().first(),
                                   date_performed = a.actiondate,
                                   remarks = a.remarks
                                   )
         except:
              error_list.append({"action_in_error": a, "error_is": sys.exc_info()})
-             return locals()
+             
                 
     return locals()                
 
 def copy_cases():
     cases = dbx(dbx.casemasterxport).select()
     error_list = []
-    return locals()
+#    return locals()
+    
     
     for case in cases:
         try:
-            db.case_master.insert(case_number = case.case_number,
+            db.case_master.insert(    case_number = case.case_number,
                                       member_id = case.member_id,
                                       description = case.casedescription,
                                       date_assigned = case.dateassigned,
@@ -53,6 +54,7 @@ def copy_cases():
                                       case_disposition = case.casedisposition,
                                       assigned_to = 3
                                       )
+            
         except :
             error_list.append({"case_in_error": case, "error_is": sys.exc_info()})
                               

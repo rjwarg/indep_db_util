@@ -154,3 +154,16 @@ timestamp: 2015-01-14T12:53:23.684331
 ALTER TABLE casemasterxport ADD firstname VARCHAR(512) NULL;
 timestamp: 2015-01-14T12:56:29.297687
 ALTER TABLE casemasterxport ADD firstname VARCHAR(512) NULL;
+timestamp: 2015-01-22T09:34:47.414351
+CREATE TABLE case_action_master(
+    id INT IDENTITY PRIMARY KEY,
+    action_name VARCHAR(512) NULL,
+    action_value VARCHAR(512) NULL
+);
+timestamp: 2015-01-22T09:35:56.350797
+CREATE TABLE case_action_master(
+    id INT IDENTITY PRIMARY KEY,
+    action_name VARCHAR(512) NULL,
+    action_value VARCHAR(512) NULL
+);
+faked!
